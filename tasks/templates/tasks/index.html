@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <script src="https://unpkg.com/htmx.org@1.9.6"></script>
+</head>
+<body>
+<h1> Doclist</h1>
+
+<div id="collections">
+    {% for collection in collections %}
+        {% include 'tasks/collections.html' with collection=collection %}
+    {% endfor %}
+</div>
+<form method="POST">
+    {% csrf_token %}
+    <label for="collection_name">Nom</label>
+    <input type="text" name="collection_name" id="collection_name"/>
+    <button hx-post="{% url 'add-collection' %}"
+            hx-target="#collections"
+            hx-swap="beforeend"
+            type="submit"> Envoyer
+    </button>
+
+</form>
+<form method="POST">
+    {% csrf_token %}
+    <label for="task_description"> Tache</label>
+    <input type="text" name="task_description" id="task_description">
+    <button type="submit"
+            hx-post="{% url 'add-task' %}"
+            hx-target="#tasks"
+            hx-vals="js:{collection: getCollectionFromUrl()}"
+            hx-swap="beforeend"> Ajouter
+    </button>
+
+</form>
+
+<div id="tasks">
+    {% include 'tasks/tasks.html' with tasks=tasks collection=collection %}
+</div>
+
+<!-- JS -->
+<script>
+    document.body.addEventListener("htmx:responseError", function (evt) {
+        alert(evt.detail.xhr.responseText);
+    })
+
+    function getCollectionFromUrl() {
+        let url = new URL(window.location.href);
+        let searchParams = url.searchParams;
+        return searchParams.get("collection");
+
+    }
+</script>
+
+</body>
+</html>

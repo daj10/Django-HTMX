@@ -1,0 +1,6 @@
+{% for task in tasks %}
+    {% include 'tasks/task.html' with task=task collection=collection%}
+{% endfor %}
+{% if collection.slug != '_defaut' %}
+    <a href="{% url 'delete-collection' collection.pk %}"> Supprimer la collection</a>
+{% endif %}
