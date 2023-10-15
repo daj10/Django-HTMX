@@ -19,8 +19,9 @@ from django.urls import path, include
 import tasks.views as tasks_views
 
 urlpatterns = [
-    path('', tasks_views.index, name='home'),
+    path('', include('sim.urls')),
     path('admin/', admin.site.urls),
     path('tasks/', include('tasks.urls')),
+    path('sim/', include('sim.urls')),
 
 ]

@@ -25,6 +25,7 @@ INSTALLED_APPS = [
     'livereload',
     'django.contrib.staticfiles',
     'tasks',
+    'sim',
 
 ]
 

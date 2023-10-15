@@ -1,7 +1,9 @@
-# Doclist
+## Getting started with htmx
 
+### Doclist: To do list
+Thibault Houdon
 
-## Model
+#### Model
 
 - Collection
   - name
@@ -11,9 +13,9 @@
   - collection(ForeignKey)
 
 
-## Functionalities
-  [x] Add collection  
-  [] Delete collection  
-  [] Disable duplicate collection  
-  [] CRUD task  
+#### Functionalities
+  [x] CRUD task, collection, Disable duplicate collection   
   [x] list task per collection
+  
+### Sim: database search using Django and HTMX 
+Tom Dekan

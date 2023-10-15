@@ -11,7 +11,7 @@ def index(request):
     collection = Collection.get_default_collection()
 
     if collection_slug:
-        collection = get_object_or_404(Collection, pk=collection_slug)
+        collection = get_object_or_404(Collection, slug=collection_slug)
 
     # All collections
     collections = Collection.objects.order_by("slug")
@@ -47,7 +47,7 @@ def add_collection(request):
 
 
 def add_task(request):
-    collection_slug_from_url = int(request.POST.get('collection'))
+    collection_slug_from_url = request.POST.get('collection')
     task_description = escape(request.POST.get('task_description'))
     collection = Collection.objects.get(slug=collection_slug_from_url)
 
