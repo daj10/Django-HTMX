@@ -5,7 +5,7 @@ from django.utils.html import escape
 from tasks.models import Collection, Task
 
 
-def index(request):
+def task_home(request):
     collection_slug = request.GET.get("collection")
 
     collection = Collection.get_default_collection()
@@ -22,7 +22,7 @@ def index(request):
         'tasks': tasks,
         'collection': collection,
     }
-    return render(request, 'tasks/index.html', context)
+    return render(request, 'tasks/task_home.html', context)
 
 
 def add_collection(request):
@@ -79,4 +79,8 @@ def delete_task(request, task_pk):
 def delete_collection(request, collection_pk):
     collection = get_object_or_404(Collection, pk=collection_pk)
     collection.delete()
-    return redirect('home')
+    return redirect('task-home')
+
+
+def index(request):
+    return render(request, 'tasks/index.html')
